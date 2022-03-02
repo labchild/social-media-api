@@ -1,0 +1,34 @@
+{
+  "name": "social-media-api",
+  "version": "1.0.0",
+  "description": "backend api for social media app using MongoDb and Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labchild/social-media-api.git"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "mongoose",
+    "mongodb",
+    "nosql"
+  ],
+  "author": "labchild",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/labchild/social-media-api/issues"
+  },
+  "homepage": "https://github.com/labchild/social-media-api#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.4"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
