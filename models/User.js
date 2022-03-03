@@ -37,6 +37,7 @@ const UserSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
+        // prevent virtuals from creating duplicate _id
         id: false
     }
 );
