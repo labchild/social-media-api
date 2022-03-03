@@ -5,13 +5,16 @@ const userController = {
     getAllUsers(req, res) {
         User.find({})
             .then(users => {
-                if (!users) {
-                    res.json({ message: 'No users yet!' });
-                    return;
-                }
+                // if (!users) {
+                //     res.json({ message: 'No users yet!' });
+                //     return;
+                // }
                 res.json(users);
             })
-            .catch(err => res.status(500).json({ message: err.message }));
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: err.message })
+            });
     },
 
     // get user by id with user's thoughts and friend list
@@ -24,7 +27,7 @@ const userController = {
                 },
                 {
                     path: 'friends',
-                    select: 'username'
+                    select: '-__v -thought -friends'
                 }
             ])
             .select('-__v')
@@ -39,7 +42,7 @@ const userController = {
     },
 
     // post a new user
-    createUser({ body }, res) {
+    addUser({ body }, res) {
         User.create(body)
             .then(user => res.json(user))
             .catch(err => res.status(500).json({ message: err.message }));
@@ -79,7 +82,7 @@ const userController = {
     // add friend to user
     addFriend({ params }, res) {
         User.findOneAndUpdate(
-            { _id: params.id },
+            { _id: params.userId },
             { $push: { friends: { _id: params.friendId } } },
             { new: true }
         )
@@ -107,4 +110,6 @@ const userController = {
         })
         .catch(err => res.status(500).json({ message: err.message }));
     }
-}
+};
+
+module.exports = userController;
