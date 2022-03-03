@@ -31,7 +31,7 @@ const thoughtController = {
     },
 
     // delete thought
-    removeThought({ params }, res) {
+    deleteThought({ params }, res) {
         // Thought.findOneAndDelete({ _id: params.thoughtId })
             // .then User.findOneAndUpdate({ _id: params.userId }, $pull)
     },
@@ -42,8 +42,10 @@ const thoughtController = {
     },
 
     // delete reaction to thought
-    removeReaction({ params }, res){
+    deleteReaction({ params }, res){
         // Thought.findOneAndUpdate
             // $pull
     }
-}
+};
+
+module.exports = thoughtController;
