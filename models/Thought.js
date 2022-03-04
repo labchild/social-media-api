@@ -1,4 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
+const formatDate = require('../utils/formatDate');
 
 // replies to thoughts Schema
 const ReactionSchema = new Schema(
@@ -19,12 +20,11 @@ const ReactionSchema = new Schema(
             type: String,
             required: true,
             trim: true
-            // connect this to ref user?
         },
         createdAt: {
             type: Date,
             default: Date.now,
-            // add getter to format date
+            get: createdAtVal => formatDate(createdAtVal)
         }
     }
 )
@@ -42,13 +42,12 @@ const ThoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // add a getter for date format
+            get: createdAtVal => formatDate(createdAtVal)
         },
         username: {
             type: String,
             required: true,
             trim: true
-            // connect this to ref user?
         },
         reactions: [ReactionSchema]
     },
@@ -56,7 +55,7 @@ const ThoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
-            // getters: true
+            getters: true
         },
         id: false
     }
