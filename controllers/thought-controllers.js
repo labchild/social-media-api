@@ -12,7 +12,7 @@ const thoughtController = {
 
     // get a single thought by id
     getThoughtById({ params }, res) {
-        Thought.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.thoughtId })
             .select('-__v')
             .then(thought => {
                 if (!thought) {
@@ -24,7 +24,7 @@ const thoughtController = {
     },
 
     // create a new thought
-    addThought({ params, body }, res) {
+    addThought({ body }, res) {
         Thought.create(body)
             .then(({ _id }) => {
                 // null check for thought creation
@@ -35,7 +35,7 @@ const thoughtController = {
                 // add thought to corresponding user
                 return User.findOneAndUpdate(
                     { _id: body.userId },
-                    { $push: { thoughts: params._id } },
+                    { $push: { thoughts: _id } },
                     { new: true }
                 );
             })
@@ -67,15 +67,15 @@ const thoughtController = {
     // delete thought
     deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtId })
-            .then(({ _id }) => {
-                if (!_id) {
+            .then(thought => {
+                if (!thought) {
                     return res.status(404).json({ message: 'No thought with this id' });
                 }
 
                 // update User document, removing this thought from thoughts arr
                 return User.findOneAndUpdate(
-                    { _id: params.userId },
-                    { $pull: { thoughts: _id } },
+                    { username: thought.username },
+                    { $pull: { thoughts: thought._id } },
                     { new: true }
                 );
             })
@@ -111,7 +111,7 @@ const thoughtController = {
     deleteReaction({ params }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
-            { $pull: { reactions: params.reactionid } },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true }
         )
             .then(thought => {

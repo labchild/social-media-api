@@ -5,7 +5,7 @@ const ReactionSchema = new Schema(
     // field definitions
     {
         reactionId: {
-            type: Types.ObjectId,
+            type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId
         },
         reactionBody: {
@@ -57,7 +57,8 @@ const ThoughtSchema = new Schema(
         toJSON: {
             virtuals: true,
             // getters: true
-        }
+        },
+        id: false
     }
 );
 
