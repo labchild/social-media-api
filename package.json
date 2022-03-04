@@ -19,7 +19,7 @@
     "nosql"
   ],
   "author": "labchild",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/labchild/social-media-api/issues"
   },
