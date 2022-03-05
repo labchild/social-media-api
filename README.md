@@ -8,7 +8,7 @@ An API for a social network web application where users can share their thoughts
     * [Built With](#built-with)
 * [Installation](#installation)
 * [Usage](#usage)
-    * [Uer Routes](#user-routes)
+    * [User Routes](#user-routes)
     * [Friend Routes](#friend-routes)
     * [Thought Routes](#thought-routes)
     * [Reaction Routes](#reaction-routes)
